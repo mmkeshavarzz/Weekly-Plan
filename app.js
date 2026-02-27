@@ -260,22 +260,34 @@ window.clearAll = function() {
     showToast('🧹 همه‌چیز پاک شد! صفحه تمیز تمیزه ✨');
 }
 
-/** Prepares DOM for Native Browser Printing */
+/** Prepares DOM for Native Browser Printing — Landscape A4 Fix */
 window.exportPDF = function() {
     preparePrintHeader();
     flushStorageQueue();
-    showToast('🖨️ آماده‌سازی PDF رنگی... 🌈');
+    showToast('🖨️ آماده‌سازی PDF افقی (Landscape)... 🌈');
+
+    /* --- Force landscape via dynamic style injection --- */
+    let printStyle = document.getElementById('print-landscape-fix');
+    if (!printStyle) {
+        printStyle = document.createElement('style');
+        printStyle.id = 'print-landscape-fix';
+        printStyle.textContent = `
+            @page { size: A4 landscape; margin: 8mm; }
+        `;
+        document.head.appendChild(printStyle);
+    }
 
     const doPrint = () => {
         window.print();
     };
 
     if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(() => setTimeout(doPrint, 80));
+        document.fonts.ready.then(() => setTimeout(doPrint, 120));
     } else {
-        setTimeout(doPrint, 200);
+        setTimeout(doPrint, 250);
     }
 }
+
 
 /** 
  * ✨ NEW FEATURE: Takes a high-res screenshot using html2canvas 
@@ -345,3 +357,4 @@ window.addEventListener('afterprint', () => {
 document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden') flushStorageQueue();
 });
+
