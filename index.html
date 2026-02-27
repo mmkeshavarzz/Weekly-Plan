@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 برنامه‌ریز هفتگی بنتو | نسخه حرفه‌ای</title>
+    <!-- استایل‌ها -->
+    <link rel="stylesheet" href="style.css">
+    <!-- عکاس اختصاصی ما برای خروجی PNG -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+    <!-- Extra Blobs for Glassmorphism -->
+    <div class="blob-extra blob-extra-1"></div>
+    <div class="blob-extra blob-extra-2"></div>
+
+    <div class="app-container" id="captureArea">
+
+        <!-- ===== PRINT-ONLY HEADER ===== -->
+        <div class="print-header">
+            <div class="print-header-brand">
+                <div class="print-brand-icon">📅</div>
+                <div>
+                    <div class="print-brand-title">برنامه‌ریز هفتگی بنتو</div>
+                    <div class="print-brand-sub">طراحی صدفی پاستیلی 🎯</div>
+                </div>
+            </div>
+            <div class="print-header-info">
+                <div class="print-info-item">
+                    <span class="pi-label">📆 هفته:</span>
+                    <span id="printWeekTitle">—</span>
+                </div>
+                <div class="print-info-item">
+                    <span class="pi-label">⏰ زمان:</span>
+                    <span id="printColTime">—</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== HEADER ===== -->
+        <header class="header" data-html2canvas-ignore>
+            <div class="header-brand">
+                <div class="brand-icon">📅</div>
+                <div class="brand-text">
+                    <h1>برنامه‌ریز هفتگی بنتو</h1>
+                    <p>
+                        <span>طراحی صدفی پاستیلی</span>
+                        <span>🎯</span>
+                    </p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-save" onclick="saveData()" title="ذخیره دستی">
+                    💾 ذخیره
+                </button>
+                <button class="btn btn-png" onclick="exportPNG()" title="ذخیره به صورت عکس">
+                    📸 خروجی PNG
+                </button>
+                <button class="btn btn-pdf" onclick="exportPDF()" title="چاپ یا PDF">
+                    📄 چاپ PDF
+                </button>
+                <button class="btn btn-clear" onclick="clearAll()" title="پاک‌سازی کل جدول">
+                    🧹 پاک‌سازی
+                </button>
+            </div>
+        </header>
+
+        <!-- ===== SETTINGS BAR ===== -->
+        <div class="settings-bar" data-html2canvas-ignore>
+            <div class="setting-group">
+                <label><span class="emoji">🏷️</span> عنوان هفته</label>
+                <input type="text" id="weekTitle" class="input-neu" placeholder="هفته اول بهمن ۱۴۰۴" value="هفته اول بهمن ۱۴۰۴">
+            </div>
+            <div class="setting-group">
+                <label><span class="emoji">🔢</span> تعداد ستون (۱-۱۰)</label>
+                <input type="number" id="colCount" class="input-neu" min="1" max="10" value="8">
+                <button class="btn btn-save" onclick="rebuildGrid()" style="padding: 8px 14px; font-size: 0.75rem;">
+                    ✓ اعمال
+                </button>
+            </div>
+            <div class="setting-group">
+                <label><span class="emoji">⏰</span> زمان ستون</label>
+                <input type="text" id="colTime" class="input-neu" placeholder="مثلاً 08:00-10:00" style="width:160px;">
+            </div>
+
+            <div class="guide-box">
+                <small><span class="dot dot-green"></span> روی خانه‌ها کلیک کنید و بنویسید</small>
+                <small><span class="dot dot-blue"></span> ذخیره خودکار فعال است</small>
+            </div>
+        </div>
+
+        <!-- ===== SCHEDULE GRID ===== -->
+        <div class="schedule-wrapper">
+            <div class="schedule-grid" id="scheduleGrid">
+                <!-- جاوااسکریپت اینجا رو می‌سازه -->
+            </div>
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <div class="footer" data-html2canvas-ignore>
+            ساخته‌شده با ❤️ | <span>برنامه‌ریز هفتگی بنتو</span> — نسخه حرفه‌ای
+        </div>
+        
+        <div class="print-footer">
+            ساخته‌شده با ❤️ | <span>برنامه‌ریز هفتگی بنتو</span>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ──── اسکریپت اصلی ──── -->
+    <script src="app.js"></script>
+
+</body>
+</html>
