@@ -215,7 +215,10 @@ body::after {
 /* ============================================
    🖨️ PRINT FIXES (NO WHITE PAGE)
    ============================================ */
-@page { size: A4; margin: 12mm; }
+@page {
+    size: A4 landscape;
+    margin: 8mm;
+}
 
 @media print {
     body { background: #fff !important; }
@@ -259,9 +262,39 @@ body::after {
         print-color-adjust: exact !important;
         text-shadow: none !important;
     }
+       html, body {
+        width: 297mm !important;      /* عرض A4 افقی */
+        height: 210mm !important;     /* ارتفاع A4 افقی */
+        overflow: hidden !important;
+    }
+
+    .schedule-grid {
+        width: 100% !important;
+        max-width: 277mm !important;  /* 297mm - 2×8mm مارجین = 281mm */
+        font-size: 9pt !important;    /* فونت کوچکتر برای جا شدن */
+        transform: none !important;
+        page-break-inside: avoid !important;
+    }
+
+    .cell textarea {
+        font-size: 8pt !important;
+        line-height: 1.3 !important;
+        min-height: 40px !important;
+    }
+
+    .col-header, .day-header {
+        font-size: 8.5pt !important;
+        padding: 4px 2px !important;
+    }
+
+    .corner-label {
+        font-size: 8pt !important;
+    }
+
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg-pearl); }
 ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, var(--pastel-purple-light), var(--pastel-pink-light)); border-radius: 10px; }
+
